@@ -328,7 +328,42 @@ async def button(bot: Client, cmd: CallbackQuery):
                 ]
             )
         )
+    elif "aboutdevs" in cb_data:
+        await cmd.message.edit(
+            Config.ABOUT_DEV_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton("Telugu BackUp Channel",
+                                             url="https://t.me/Telugu_Movies_Back_Up")
+                    ],
+                    [
+                        InlineKeyboardButton("🧯 Help", callback_data="aboutbot"),
+                        InlineKeyboardButton("🏡 Home", callback_data="gotohome")
+                    ]
+                ]
+            )
+        )
 
+    elif "gotohome" in cb_data:
+        await cmd.message.edit(
+            Config.HOME_TEXT.format(cmd.message.chat.first_name, cmd.message.chat.id),
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton("Telugu BackUp Channel", url="https://t.me/Telugu_Movies_Back_Up")
+                    ],
+                    [
+                        InlineKeyboardButton("🧯 Help", callback_data="aboutbot"),
+                        InlineKeyboardButton("🛰️ About", callback_data="aboutdevs"),
+                        InlineKeyboardButton("🪜 Close", callback_data="closeMessage")
+                        
+                    ]
+                ]
+            )
+        )
     elif "refreshForceSub" in cb_data:
         if Config.UPDATES_CHANNEL:
             if Config.UPDATES_CHANNEL.startswith("-100"):
@@ -361,7 +396,7 @@ async def button(bot: Client, cmd: CallbackQuery):
                 return
             except Exception:
                 await cmd.message.edit(
-                    text="Something went Wrong. Contact my [Support Group](https://t.me/TeleRoid14).",
+                    text="Something went Wrong.",
                     disable_web_page_preview=True
                 )
                 return
