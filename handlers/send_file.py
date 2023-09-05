@@ -18,11 +18,10 @@ async def reply_forward(message: Message, file_id: int):
 async def media_forward(bot: Client, user_id: int, file_id: int):
     try:
         if Config.FORWARD_AS_COPY is True:
-            return await bot.copy_message(chat_id=user_id, from_chat_id=Config.DB_CHANNEL,
-                                          message_id=file_id)
+        sent_message = await bot.copy_message(chat_id=user_id, from_chat_id=Config.DB_CHANNEL, message_id=file_id)
         elif Config.FORWARD_AS_COPY is False:
-            return await bot.forward_messages(chat_id=user_id, from_chat_id=Config.DB_CHANNEL,
-                                              message_ids=file_id)
+            sent_message = await bot.forward_messages(chat_id=user_id, from_chat_id=Config.DB_CHANNEL, message_ids=file_id)
+        return sent_message
     except FloodWait as e:
         await asyncio.sleep(e.value)
         return media_forward(bot, user_id, file_id)
