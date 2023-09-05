@@ -315,7 +315,6 @@ async def button(bot: Client, cmd: CallbackQuery):
         await cmd.message.edit(
             Config.ABOUT_BOT_TEXT,
             disable_web_page_preview=True,
-            tdevs"),
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
